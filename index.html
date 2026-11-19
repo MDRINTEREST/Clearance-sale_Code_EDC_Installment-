@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code EDC ผ่อนชำระ | Clearance Sale</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1ea;--ink:#1c1b19;--mute:#6b675f;--line:#ddd7cb;--card:#fff;--accent:#d7261e;--bank:#333}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;min-height:100vh}
+header{background:#d7261e;color:#fff;padding:22px 20px 18px;position:relative;overflow:hidden}
+header::after{content:"CLEARANCE";position:absolute;right:-10px;bottom:-22px;font:700 84px/1 'JetBrains Mono',monospace;color:rgba(255,255,255,.1);letter-spacing:-2px;pointer-events:none}
+.wrap{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.tag{display:inline-block;background:#fff;color:#d7261e;font-weight:700;font-size:12px;padding:3px 10px;border-radius:3px;letter-spacing:.5px;transform:rotate(-1.5deg)}
+h1{font-size:26px;font-weight:700;margin-top:8px;line-height:1.25}
+.sub{color:#ffe1de;font-size:14px;margin-top:4px}
+.today{font-size:13px;color:#ffe1de;margin-top:10px}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px}
+.tabs .wrap{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tab{flex:0 0 auto;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:600 14px 'IBM Plex Sans Thai',system-ui,sans-serif;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:8px}
+.tab .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.tab.on{background:var(--c);border-color:var(--c);color:#fff}
+.tab.on .dot{background:#fff}
+.filters{display:flex;gap:6px;margin-top:10px;align-items:center;font-size:13px;color:var(--mute)}
+.chip{border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 12px;font:600 13px 'IBM Plex Sans Thai',system-ui,sans-serif;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{padding:20px}
+.bank{margin-bottom:34px}
+.bank-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:3px solid var(--c);padding-bottom:8px;margin-bottom:14px;flex-wrap:wrap}
+.bank-h h2{font-size:22px;font-weight:700;color:var(--c);display:flex;align-items:center}
+.logo{height:44px;max-width:200px;object-fit:contain;display:block}
+.tab .tlogo{height:22px;max-width:90px;object-fit:contain;display:block}
+.tab.on .tlogo{filter:brightness(0) invert(1)}
+.tab:has(.tlogo){padding:7px 14px}
+.period{font-size:13px;color:var(--mute)}
+.status{font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:6px}
+.ok{background:#e3f3e6;color:#17692b}.soon{background:#fff1d6;color:#8a5a00}.exp{background:#fde2e0;color:#a3170f}.wait{background:#e6ecf7;color:#2b4d8a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card.dim{opacity:.5}
+.card-top{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px dashed var(--line)}
+.ten{background:var(--c);color:#fff;border-radius:8px;width:56px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 auto}
+.ten b{font:700 24px/1 'JetBrains Mono',monospace}
+.ten span{font-size:11px;margin-top:2px}
+.cardname{font-weight:600;font-size:15px;line-height:1.3}
+.meta{font-size:12px;color:var(--mute)}
+.codes{padding:10px 14px 12px;display:flex;flex-direction:column;gap:8px}
+.code{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8f6f1;border-radius:6px;padding:7px 8px 7px 12px}
+.code small{display:block;font-size:11px;color:var(--mute);line-height:1.2}
+.code strong{font:700 20px/1.2 'JetBrains Mono',monospace;letter-spacing:1px}
+.cp{border:0;background:var(--ink);color:#fff;border-radius:5px;padding:6px 10px;font:600 12px 'IBM Plex Sans Thai',system-ui,sans-serif;cursor:pointer;flex:0 0 auto}
+.cp.done{background:#17692b}
+.step{font:700 11px 'JetBrains Mono';color:var(--c);margin-right:6px}
+.note{font-size:12px;color:var(--mute);padding:0 14px 12px}
+.cond{background:#fff;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px;margin-top:12px;font-size:14px}
+.cond summary{padding:10px 14px;cursor:pointer;font-weight:600}
+.cond div{padding:0 14px 14px;white-space:pre-line;color:#3a3833}
+.empty{color:var(--mute);padding:20px 0}
+footer{text-align:center;font-size:12px;color:var(--mute);padding:10px 20px 30px}
+@media(max-width:520px){h1{font-size:22px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <span class="tag">CLEARANCE SALE</span>
+  <h1>Code EDC ผ่อนชำระ แยกตามธนาคาร</h1>
+  <div class="sub">สินค้า: รุ่นอื่นทั้งหมด (All Model) · แตะ “คัดลอก” เพื่อคัดลอกรหัส</div>
+  <div class="today" id="today"></div>
+</div></header>
+
+<nav class="tabs"><div class="wrap" id="tabs"></div>
+<div class="wrap filters">งวด:
+  <button class="chip on" data-t="all">ทั้งหมด</button>
+  <button class="chip" data-t="4">4 เดือน</button>
+  <button class="chip" data-t="6">6 เดือน</button>
+</div></nav>
+
+<main><div class="wrap" id="list"></div></main>
+<footer>ข้อมูลจากไฟล์ Master Code EDC ผ่อนชำระ · กรุณาตรวจสอบวันที่โปรโมชันก่อนรูดบัตร</footer>
+
+<script>
+const DATA = {"rows": [{"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "SCB (ไทยพาณิชย์)", "buy": "ทั้งสองแบบ", "t": 4, "tc": null, "i": null, "cb": null, "card": "บัตรเครดิต SCB", "codes": [{"n": "รหัสสินค้า", "v": "299391680"}], "note": null, "s": "2026-10-01", "e": "2027-01-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "SCB (ไทยพาณิชย์)", "buy": "ทั้งสองแบบ", "t": 4, "tc": null, "i": null, "cb": null, "card": "SCB Speedy Cash (บัตรกดเงินสด)", "codes": [{"n": "รหัสสินค้า", "v": "299391870"}], "note": null, "s": "2026-10-01", "e": "2027-01-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "SCB (ไทยพาณิชย์)", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "บัตรเครดิต SCB", "codes": [{"n": "รหัสสินค้า", "v": "299391698"}], "note": null, "s": "2026-10-01", "e": "2027-01-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "SCB (ไทยพาณิชย์)", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "SCB Speedy Cash (บัตรกดเงินสด)", "codes": [{"n": "รหัสสินค้า", "v": "299391888"}], "note": null, "s": "2026-10-01", "e": "2027-01-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "KBank (กสิกรไทย)", "buy": "ทั้งสองแบบ", "t": 4, "tc": null, "i": null, "cb": null, "card": "ทุกบัตร", "codes": [{"n": "Suppliers Number (5 หลัก)", "v": "00362"}, {"n": "ID CODE (9 หลัก) ช่องที่ 1", "v": "001"}, {"n": "ID CODE (9 หลัก) ช่องที่ 2", "v": "301574"}], "note": null, "s": "2026-01-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "KBank (กสิกรไทย)", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "ทุกบัตร", "codes": [{"n": "Suppliers Number (5 หลัก)", "v": "00362"}, {"n": "ID CODE (9 หลัก) ช่องที่ 1", "v": "001"}, {"n": "ID CODE (9 หลัก) ช่องที่ 2", "v": "301590"}], "note": null, "s": "2026-01-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "UOB & Citi", "buy": "ทั้งสองแบบ", "t": 4, "tc": null, "i": null, "cb": null, "card": "UOB Credit Card", "codes": [{"n": "รหัส", "v": "993991"}], "note": null, "s": "2026-10-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "UOB & Citi", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "UOB Credit Card", "codes": [{"n": "รหัส", "v": "993967"}], "note": null, "s": "2026-10-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "UOB & Citi", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "UOB Cash Plus", "codes": [{"n": "รหัส", "v": "994015"}], "note": null, "s": "2026-10-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "BBL (กรุงเทพ)", "buy": "ทั้งสองแบบ", "t": 4, "tc": null, "i": null, "cb": null, "card": "ทุกบัตร", "codes": [{"n": "Supplier ID", "v": "000012"}, {"n": "รหัสประเภทสินค้า", "v": "050"}, {"n": "รหัสสินค้า", "v": "005247"}], "note": null, "s": "2025-04-01", "e": "2026-12-31"}, {"p": "รุ่นอื่นทั้งหมด (All Model)", "b": "BBL (กรุงเทพ)", "buy": "ทั้งสองแบบ", "t": 6, "tc": null, "i": null, "cb": null, "card": "ทุกบัตร", "codes": [{"n": "Supplier ID", "v": "000012"}, {"n": "รหัสประเภทสินค้า", "v": "050"}, {"n": "รหัสสินค้า", "v": "005248"}], "note": null, "s": "2025-04-01", "e": "2026-12-31"}], "cond": {"SCB (ไทยพาณิชย์)": {"period": "วันที่ 1 ต.ค. 69 – 31 ม.ค. 70", "s": "2026-10-01", "e": "2027-01-31", "detail": null}, "KBank (กสิกรไทย)": {"period": "วันที่ 1 มค. - 31 ธค.69", "s": "2026-01-01", "e": "2026-12-31", "detail": "วันที่ 1 มค. - 31 ธค.69\n\nรับเครดิตเงินคืน 12%*  เมื่อใช้คะแนน K Point แลกเท่ายอดใช้จ่าย ทั้งเต็มจำนวน และ แบ่งชำระ  (ไม่จำกัดยอดใช้จ่ายขั้นต่ำ และ จำกัดการแลกเครดิตเงินคืนสูงสุด 25,000 คะแนน / เดือน)\n\nขั้นตอนการรับสิทธิ์ SMS พิมพ์ COM (วรรค) หมายเลขบัตรเครดิต 12 หลักสุดท้าย (วรรค) จำนวนยอดใช้จ่าย (ไม่ใส่จุดทศนิยม)\nส่งมาที่ 4545888 (ครั้งละ 3 บาท)\n\nระยะเวลา วันที่  1 มค. - 31 ธค.69"}, "UOB & Citi": {"period": "1 ต.ค.69 – 31 ธ.ค.69", "s": "2026-10-01", "e": "2026-12-31", "detail": null}, "BBL (กรุงเทพ)": {"period": "1 เม.ย. 68 -31 ธ.ค.69", "s": "2025-04-01", "e": "2026-12-31", "detail": null}}};
+const LOGOS = {"SCB (ไทยพาณิชย์)":"logos/scb.png","KBank (กสิกรไทย)":"logos/kbank.png","UOB & Citi":"logos/uob.png","BBL (กรุงเทพ)":"logos/bbl.png"};
+const COLORS = {"SCB (ไทยพาณิชย์)":"#4e2a84","KBank (กสิกรไทย)":"#138f45","UOB & Citi":"#0b3b8c","BBL (กรุงเทพ)":"#1e4598"};
+const TH_M=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+const fmt=s=>{if(!s)return"-";const d=new Date(s+"T00:00");return d.getDate()+" "+TH_M[d.getMonth()]+" "+String(d.getFullYear()+543).slice(2)};
+const today=new Date();today.setHours(0,0,0,0);
+document.getElementById("today").textContent="วันนี้: "+fmt(today.toISOString().slice(0,10).replace(/.*/,()=>{const y=today.getFullYear(),m=String(today.getMonth()+1).padStart(2,"0"),d=String(today.getDate()).padStart(2,"0");return y+"-"+m+"-"+d}));
+function status(s,e){
+  const S=new Date(s+"T00:00"),E=new Date(e+"T00:00");
+  if(today<S)return["wait","ยังไม่เริ่ม"];
+  if(today>E)return["exp","หมดอายุแล้ว"];
+  const left=Math.round((E-today)/864e5);
+  return left<=14?["soon","เหลือ "+left+" วัน"]:["ok","ใช้งานได้"];
+}
+const banks=[...new Set(DATA.rows.map(r=>r.b))];
+function logoTag(b,cls,pre){const src=LOGOS[b];const txt=pre+esc(b);if(!src)return txt;return `<img class="${cls}" src="${src}" alt="${esc(b)}" onerror="this.outerHTML=this.dataset.fb" data-fb="${txt.replace(/"/g,'&quot;')}">`}
+let curBank="all",curT="all";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const tabs=document.getElementById("tabs");
+tabs.innerHTML=`<button class="tab on" data-b="all" style="--c:#1c1b19"><span class="dot"></span>ทุกธนาคาร</button>`+
+  banks.map(b=>`<button class="tab" data-b="${esc(b)}" title="${esc(b)}" style="--c:${COLORS[b]||"#444"}">${logoTag(b,"tlogo",'<span class="dot"></span>')}</button>`).join("");
+tabs.onclick=e=>{const t=e.target.closest(".tab");if(!t)return;curBank=t.dataset.b;tabs.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));render()};
+document.querySelector(".filters").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;curT=c.dataset.t;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===c));render()};
+
+function render(){
+  const list=document.getElementById("list");let html="";
+  for(const b of banks){
+    if(curBank!=="all"&&curBank!==b)continue;
+    const rows=DATA.rows.filter(r=>r.b===b&&(curT==="all"||String(r.t)===curT));
+    if(!rows.length)continue;
+    const c=COLORS[b]||"#444",cond=DATA.cond[b]||{};
+    const [cls,txt]=status(rows[0].s,rows[0].e);
+    html+=`<section class="bank" style="--c:${c}">
+      <div class="bank-h"><h2 title="${esc(b)}">${logoTag(b,"logo","")}</h2>
+      <div class="period">ระยะเวลา: ${esc(cond.period||fmt(rows[0].s)+" – "+fmt(rows[0].e))}<span class="status ${cls}">${txt}</span></div></div>
+      <div class="grid">`+rows.map(r=>{
+        const [k]=status(r.s,r.e);
+        const extra=[r.buy&&"รูปแบบ: "+r.buy,r.i&&"ดอกเบี้ย "+r.i,r.cb&&"เครดิตเงินคืน "+r.cb,r.tc].filter(Boolean).join(" · ");
+        return `<div class="card ${k==="exp"?"dim":""}">
+          <div class="card-top"><div class="ten"><b>${r.t}</b><span>เดือน</span></div>
+            <div><div class="cardname">${esc(r.card)}</div><div class="meta">${esc(extra)}</div>
+            <div class="meta">${fmt(r.s)} – ${fmt(r.e)}</div></div></div>
+          <div class="codes">${r.codes.map((x,i)=>`<div class="code"><div><small>${r.codes.length>1?`<span class="step">${i+1}</span>`:""}${esc(x.n)}</small><strong>${esc(x.v)}</strong></div>
+            <button class="cp" data-v="${esc(x.v)}">คัดลอก</button></div>`).join("")}</div>
+          ${r.note?`<div class="note">หมายเหตุ: ${esc(r.note)}</div>`:""}
+        </div>`}).join("")+`</div>
+      ${cond.detail?`<details class="cond"><summary>เงื่อนไข / เครดิตเงินคืน / วิธีลงทะเบียน</summary><div>${esc(cond.detail.trim())}</div></details>`:""}
+    </section>`;
+  }
+  list.innerHTML=html||`<div class="empty">ไม่พบรายการ</div>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".cp");if(!b)return;
+  const v=b.dataset.v,done=()=>{b.textContent="คัดลอกแล้ว ✓";b.classList.add("done");setTimeout(()=>{b.textContent="คัดลอก";b.classList.remove("done")},1500)};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(v).then(done).catch(()=>fallback(v,done));else fallback(v,done);
+});
+function fallback(v,done){const t=document.createElement("textarea");t.value=v;document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(_){}t.remove();done()}
+render();
+</script>
+</body>
+</html>
